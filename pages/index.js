@@ -1,4 +1,8 @@
 import Head from 'next/head';
+import Script from 'next/script';
+import React, { useEffect } from 'react';
+import ReactTyped from 'react-typed';
+import Fade from 'react-reveal/Fade';
 
 export default function Home() {
   const tenis = [
@@ -11,6 +15,10 @@ export default function Home() {
     { id: 7, src: '7.png' },
     { id: 8, src: '8.png' },
   ];
+  const textLines = [
+    'O tênis Jordan é fruto de uma velha e forte parceria entre a Nike e o jogador Michael Jordan.',
+  ];
+
   return (
     <>
       <Head>
@@ -37,8 +45,7 @@ export default function Home() {
                   A melhor loja de Jordan
                 </h1>
                 <h3 className="md:text-lg text-base">
-                  O tênis Jordan é fruto de uma velha e forte parceria entre a
-                  Nike e o jogador Michael Jordan.
+                  <ReactTyped strings={textLines} typeSpeed={30}></ReactTyped>
                 </h3>
               </div>
             </div>
@@ -58,12 +65,13 @@ export default function Home() {
             </div>
             <div className="grid 2xl:grid-cols-4 md:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-x-3 gap-y-10 pb-24">
               {tenis.map((item) => (
-                <div
-                  key={item.id}
-                  className="bg-[#EBE9EA] w-[100%] min-h-[300px] flex place-content-center place-items-center"
-                >
-                  <img src={item.src} />
-                </div>
+                <Fade top key={item.id} delay={200} reset={true}>
+                  <div className="bg-[#EBE9EA] w-[100%] min-h-[300px] flex place-content-center place-items-center">
+                    <Fade delay={500} top reset={true}>
+                      <img src={item.src} />{' '}
+                    </Fade>
+                  </div>
+                </Fade>
               ))}
             </div>
           </div>
